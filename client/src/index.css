@@ -7,7 +7,70 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App{
+  padding: 0% 2%;
+}
+.searchBar{
+  margin: 0.3rem;
+  padding: 1rem;
+  border-radius: 5px;
+	border: none;
+	background-color: rgb(255, 255, 255);
+	width: 100%;
+  
+}
+.searchBar:focus {
+  outline-color: gray;
+}
+
+.searchBarDiv{
+  display: flex;
+	align-items: center;
+	background-color: rgb(233, 233, 233);
+	border-radius: 10px;
+	padding: 5px;
+	margin-bottom: 1.5em;
+}
+.note-list{
+  display: grid;
+	grid-gap: 1rem;
+	grid-template-columns: repeat(
+		auto-fill,
+		minmax(250px, 1fr)
+	);
+}
+
+.note {
+	background-color: #fdf036;
+	border-radius: 10px;
+	padding: 1rem;
+	min-height: 170px;
+	display: flex;
+	flex-direction: column;
+	white-space: pre-wrap;
+}
+
+.note.new{
+  background-color: #67d7cc;
+}
+.note-header{
+  margin: 0;
+  padding: 0.5rem;
+  font-weight: 700;
+  font-size: x-large;
+  border: none;
+}
+.note-body{
+  margin: 0;
+  padding: 0.5rem;
+  height: 95%;
+  border: none;
+}
+.note-footer {
+  margin: 0;
+  padding:  0 0.5rem;
+	display: flex;
+	align-items: right;
+  width: 20%;
+	justify-content:space-between;
 }

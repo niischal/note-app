@@ -1,24 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import NoteList from "./components/NoteList";
+import Searchbar from "./components/Searchbar";
+import React, { useState } from "react";
+
+import { NoteContext } from "./NoteContext";
 
 function App() {
+  const [keyword, setKeyword] = useState("");
+  const [notes, setNotes] = useState([]);
+  const handleKeywordChange = (keyword) => {
+    setKeyword(keyword);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <NoteContext.Provider value={{ notes, setNotes }}>
+      <div className="App">
+        <h1>Notes</h1>
+        <Searchbar
+          keyword={keyword}
+          handleKeywordChange={handleKeywordChange}
+        />
+        <NoteList />
+      </div>
+    </NoteContext.Provider>
   );
 }
 
