@@ -31,8 +31,8 @@ function Note({ note }) {
           <div className="note-header">{note.title}</div>
           <div className="note-body">{note.body}</div>
           <div className="note-footer">
-            <BsPencilFill onClick={handleEdit} />
-            <BsFillTrashFill onClick={handleDelete} />
+            <BsPencilFill className="icons" onClick={handleEdit} />
+            <BsFillTrashFill className="icons" onClick={handleDelete} />
           </div>
         </div>
       )}
