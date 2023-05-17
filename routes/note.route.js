@@ -10,11 +10,11 @@ router.post("/addNote", async (req, res) => {
   });
   try {
     newNote.save();
+
+    sendAllNotes(res);
   } catch (err) {
     return res.status(400).send({ message: "Something Went Wrong" });
   }
-
-  sendAllNotes(res);
 });
 
 router.get("/getAllNotes", async (req, res) => {
@@ -46,8 +46,28 @@ router.post("/editNote", async (req, res) => {
   }
 });
 
+router.get("/getFilteredNote", async (req, res) => {
+  try {
+    const keyword = req.body.keyword;
+    if (keyword === "") {
+      sendAllNotes(res);
+    } else {
+      const notes = await Note.find();
+      const filteredNotes = notes.filter((note) => {
+        return (
+          note.title.toLowerCase().includes(keyword.toLowerCase()) ||
+          note.body.toLowerCase().includes(keyword.toLowerCase())
+        );
+      });
+      return res.status(200).send(filteredNotes);
+    }
+  } catch (err) {
+    return res.status(400).send({ message: "Something Went Wrong" });
+  }
+});
+
 const sendAllNotes = async (res) => {
   const allNotes = await Note.find();
-  return res.send(allNotes);
+  return res.status(200).send(allNotes);
 };
 module.exports = router;
