@@ -4,12 +4,12 @@ const mongoose = require("mongoose");
 const Note = require("../models/NoteModel");
 
 router.post("/addNote", async (req, res) => {
-  const newNote = new Note({
-    title: req.body.title,
-    body: req.body.body,
-  });
   try {
-    newNote.save();
+    const newNote = new Note({
+      title: req.body.title,
+      body: req.body.body,
+    });
+    await newNote.save();
 
     sendAllNotes(res);
   } catch (err) {
@@ -46,7 +46,7 @@ router.post("/editNote", async (req, res) => {
   }
 });
 
-router.get("/getFilteredNote", async (req, res) => {
+router.post("/getFilteredNote", async (req, res) => {
   try {
     const keyword = req.body.keyword;
     if (keyword === "") {
@@ -59,10 +59,12 @@ router.get("/getFilteredNote", async (req, res) => {
           note.body.toLowerCase().includes(keyword.toLowerCase())
         );
       });
+      console.log("filteredNotes", filteredNotes);
       return res.status(200).send(filteredNotes);
     }
   } catch (err) {
-    return res.status(400).send({ message: "Something Went Wrong" });
+    console.log("err", err);
+    return res.status(500).send({ message: err });
   }
 });
 

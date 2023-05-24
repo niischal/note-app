@@ -17,7 +17,6 @@ body {
 	border: none;
 	background-color: rgb(255, 255, 255);
 	width: 100%;
-  
 }
 .searchBar:focus {
   outline-color: gray;

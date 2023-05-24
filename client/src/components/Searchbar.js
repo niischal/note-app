@@ -3,12 +3,14 @@ import { NoteContext } from "../NoteContext";
 import axios from "axios";
 
 function Searchbar() {
-  const [keyword, setKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
   const { setNotes } = useContext(NoteContext);
   const handleKeywordChange = async (keyword) => {
-    setKeyword(keyword);
+    setSearchKeyword(keyword);
+
     await axios
-      .get("http://localhost:5000/note/getFilteredNote", { keyword })
+      .post("http://localhost:5000/note/getFilteredNote", { keyword })
+
       .then((res) => {
         setNotes(res.data);
       })
@@ -21,7 +23,7 @@ function Searchbar() {
       <input
         type="text"
         placeholder="Search..."
-        value={keyword}
+        value={searchKeyword}
         onChange={(e) => handleKeywordChange(e.target.value)}
         className="searchBar"
       />
